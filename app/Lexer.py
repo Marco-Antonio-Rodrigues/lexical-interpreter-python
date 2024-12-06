@@ -56,7 +56,7 @@ class Lexer:
                 tokens.append(self.__makeId())
             else:
                 self.__advance()
-                return [], Error(f"{Error.lexerError}: lex-symbol '{self.current}' fail!")
+                return [], Error.lexer_error(f"lex-symbol '{self.current}' fail!")
 
         tokens.append(Token(Consts.EOF))
         return tokens, None

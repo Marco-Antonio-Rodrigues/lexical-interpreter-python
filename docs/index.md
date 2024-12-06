@@ -2,6 +2,8 @@
 
 Este é um projeto de interpretação lexical para uma linguagem específica, desenvolvido em Python. Ele é composto por módulos que realizam diferentes etapas de análise, como tokenização, análise de erros e execução interativa.
 
+---
+
 ## 📁 Estrutura do Projeto
 
 ```bash
@@ -21,27 +23,31 @@ LEXICAL-INTERPRETER/
 └── pyproject.toml          # Arquivo de configuração do Poetry
 ```
 
+---
+
 ## 🛠️ Funcionalidades
 
-- **Análise Lexical (Lexer):**
-  - Identifica e separa tokens do código-fonte com base na gramática especificada.
-  
-- **Tratamento de Erros (Error):**
-  - Gera mensagens claras e detalhadas para erros encontrados durante a análise lexical.
-  
-- **Loop Interativo (REPL):**
-  - Permite que o usuário interaja diretamente com o interpretador em um ambiente de linha de comando.
+### **Análise Lexical (Lexer):**
+- Identifica e separa tokens do código-fonte com base na gramática especificada.
 
-- **Definição de Tokens (Token):**
-  - Representa os diferentes tipos de tokens usados na linguagem.
+### **Tratamento de Erros (Error):**
+- Gera mensagens claras e detalhadas para erros encontrados durante a análise lexical.
+
+### **Loop Interativo (REPL):**
+- Permite que o usuário interaja diretamente com o interpretador em um ambiente de linha de comando.
+
+### **Definição de Tokens (Token):**
+- Representa os diferentes tipos de tokens usados na linguagem.
+
+---
 
 ## 🚀 Como Executar
 
-### Pré-requisitos
+### **Pré-requisitos**
 - Python 3.8 ou superior
 - Poetry (para gerenciamento de dependências)
 
-### Instalação
+### **Instalação**
 
 1. Clone o repositório:
 
@@ -62,6 +68,8 @@ LEXICAL-INTERPRETER/
    poetry run python main.py
    ```
 
+---
+
 ## 🧪 Testes
 
 Para rodar os testes:
@@ -72,6 +80,8 @@ Para rodar os testes:
    ```bash
    poetry run pytest
    ```
+
+---
 
 ## 📜 Gramática
 

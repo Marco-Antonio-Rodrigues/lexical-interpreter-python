@@ -36,7 +36,6 @@ class Repl(Cmd):
         lexer = Lexer(linha)
         tokens, error = lexer.makeTokens()
         if error: 
-            print(error)
             return None, error
         print(f'Lexer: {tokens}')
 

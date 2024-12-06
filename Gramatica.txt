@@ -4,15 +4,15 @@
 <Factor> ::= <Atom>
 <Atom> ::= INT | FLOAT | LPAR <Exp> RPAR
 
+# Terminais
 PLUS é o +
 MUL é o *
 DIV é o /
 MINUS é o -
-POW é o ^
 LPAR é o (
 RPAR é o )
+
+
+# Tipos
 INT é um inteiro qualquer
 FLOAT é um float qualquer
-ID é qualquer identificador
-LET é a palavra reservada let
-STRING algo entre aspas
