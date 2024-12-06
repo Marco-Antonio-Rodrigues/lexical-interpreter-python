@@ -1,6 +1,6 @@
-from app.Lexer import Lexer
+from app.lexer import Lexer
 from cmd import Cmd
-from app.recursivo_desc import RecursiveDescentParser
+from app.recursivo_descent_parser import RecursiveDescentParser
 
 class Repl(Cmd):
     prompt = 'UFC> '

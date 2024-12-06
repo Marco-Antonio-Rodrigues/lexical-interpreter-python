@@ -1,6 +1,6 @@
-from app.Consts import Consts
-from app.Token import Token
-from app.Error import Error
+from app.consts import Consts
+from app.token import Token
+from app.error import Error
 
 class Lexer:
     def __init__(self, source_code):

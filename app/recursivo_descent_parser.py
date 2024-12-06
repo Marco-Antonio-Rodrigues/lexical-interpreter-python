@@ -1,4 +1,4 @@
-from app.Consts import Consts
+from app.consts import Consts
 
 class RecursiveDescentParser:
     """ i é int | E-> iK | K -> +iK | K -> """
