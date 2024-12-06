@@ -1,4 +1,4 @@
-from app.Lexer import Lexer
+from app.lexer import Lexer
 
 def test_deve_aceitar_plus():
     input_string = '++'
