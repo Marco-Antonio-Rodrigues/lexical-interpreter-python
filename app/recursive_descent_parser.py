@@ -3,7 +3,7 @@ from app.consts import Consts
 class RecursiveDescentParser:
     """ i é int | E-> iK | K -> +iK | K -> """
     
-    def __init__(self, tokens):
+    def __init__(self, tokens:list):
         self.tokens = tokens
         self.current_index = -1
         self.current_token = None
