@@ -1,8 +1,5 @@
-from app.Repl import Repl
-
-def prompt():
-  Repl().cmdloop()
-
+from app.repl import Repl
+  
 if __name__ == "__main__":
-  prompt()
+  Repl().cmdloop()
   

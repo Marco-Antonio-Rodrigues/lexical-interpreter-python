@@ -29,8 +29,6 @@ class Lexer:
                 self.__advance()
             elif self.current in Consts.DIGITOS:
                 tokens.append(self.__makeNumber())
-            elif self.current == '"':
-                tokens.append(self.__MakeString())
             elif self.current == Consts.PLUS:
                 tokens.append(Token(Consts.PLUS))
                 self.__advance()
@@ -43,25 +41,21 @@ class Lexer:
             elif self.current == Consts.DIV:
                 tokens.append(Token(Consts.DIV))
                 self.__advance()
-            elif self.current == Consts.POW:
-                tokens.append(Token(Consts.POW))
-                self.__advance()
             elif self.current == Consts.LPAR:
                 tokens.append(Token(Consts.LPAR))
                 self.__advance()
             elif self.current == Consts.RPAR:
                 tokens.append(Token(Consts.RPAR))
                 self.__advance()
-            elif self.current in Consts.LETRAS + Consts.UNDER:
-                tokens.append(self.__makeId())
             else:
                 self.__advance()
-                return [], Error.lexer_error(f"lex-symbol '{self.current}' fail!")
+                return [], Error.lexer_error(message=f"lex-symbol '{self.current}' fail!",details=f"line: {self.linha}, column: {self.coluna}, indice: {self.indice}")
 
         tokens.append(Token(Consts.EOF))
         return tokens, None
 
     def __makeNumber(self):
+        """return int or float"""
         strNumber = ''
         dotCount = 0
         while self.current != None and self.current in Consts.DIGITOS + '.':
@@ -76,30 +70,4 @@ class Lexer:
             return Token(Consts.INT, int(strNumber))
         else:
             return Token(Consts.FLOAT, float(strNumber))
-        
-    def __MakeString(self):
-        stri = ""
-        bypass = False
-        self.__advance()
-        specialChars = {'n':'\n', 't': '\t'}
-        while self.current != None and self.current != '"' or bypass:
-            if bypass:
-                c = specialChars.get(self.current, self.current)
-                stri += c
-                bypass = False
-            elif self.current == '\\':
-                bypass = True
-            else:
-                stri += self.current
-            self.__advance()
-        self.__advance()
-        return Token(Consts.STRING, stri)
     
-    def __makeId(self):
-        lexema = ''
-        while self.current != None and self.current in Consts.LETRAS_DIGITOS+Consts.UNDER:
-            lexema += self.current
-            self.__advance()
-        tokType = Consts.KEY if lexema in Consts.KEYS else Consts.ID
-        return Token(tokType, lexema)
-        
