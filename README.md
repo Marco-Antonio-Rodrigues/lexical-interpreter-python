@@ -83,5 +83,5 @@ Para rodar o MkDocs, siga os passos:
 
 1. **Inicie o servidor local de desenvolvimento:**
    ```bash
-   mkdocs serve
+   poetry run mkdocs serve
    ```
