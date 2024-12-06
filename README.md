@@ -76,3 +76,12 @@ Para rodar os testes:
 ## 📜 Gramática
 
 A gramática da linguagem utilizada está definida no arquivo `Gramatica.txt`. Consulte este arquivo para entender as regras e estruturas reconhecidas pelo interpretador.
+
+## DOC
+
+Para rodar o MkDocs, siga os passos:
+
+1. **Inicie o servidor local de desenvolvimento:**
+   ```bash
+   mkdocs serve
+   ```
