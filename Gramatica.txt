@@ -1,18 +1,40 @@
-<Exp> ::= <Term> ((MINUS | PLUS) <Term>)*
+<Exp> ::= <Term> ((PLUS | MINUS) <Term>)*
+<RelExp> ::= <Term> ((LT | GT | LEQ | GEQ | EQ | NEQ) <Term>)*
 <Term> ::= <Factor> ((MUL | DIV) <Factor>)*
-<Factor> ::= (PLUS | MINUS)* <Factor>
-<Factor> ::= <Atom>
-<Atom> ::= INT | FLOAT | LPAR <Exp> RPAR
+<Factor> ::= (PLUS | MINUS)* <Atom> | <Atom>
+<Atom> ::= INT | FLOAT | LPAR <Exp> RPAR | <ID> | <FUNC> LPAR <ExpSequence> RPAR | LBRACK <ExpSequence> RBRACK | LPAR <ExpSequence> RPAR
+<ExpSequence> ::= <Exp> (COMMA <Exp>)*
+<Stmt> ::= <ID> ASSIGN <Exp> SEMICOLON?
+<Stmt> ::= IF LPAR <RelExp> RPAR LBRACE <StmtList> RBRACE (ELSE LBRACE <StmtList> RBRACE)? SEMICOLON?
+<StmtList> ::= <Stmt>+
+<FUNC> ::= sin | cos | tan | sqrt | log | exp | <CustomFunc>
+<CustomFunc> ::= <ID>
+<ID> ::= [a-zA-Z_][a-zA-Z0-9_]*
 
-# Terminais
 PLUS é o +
 MUL é o *
 DIV é o /
 MINUS é o -
+EXP é o ^
 LPAR é o (
 RPAR é o )
-
-
-# Tipos
+ASSIGN é o =
+LBRACK é o [
+RBRACK é o ]
+COMMA é o ,
+SEMICOLON é o ;
+LT é o <
+GT é o > 
+LEQ é o >=
+GEQ é o <= 
+EQ é o == 
+NEQ é o != 
+LBRACE é o {
+RBRACE é o }
+IF é o if
+ELSE é o else
 INT é um inteiro qualquer
 FLOAT é um float qualquer
+ID é qualquer identificador
+LET é a palavra reservada let
+STRING algo entre aspas
