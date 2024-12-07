@@ -73,7 +73,7 @@ t_ignore = ' \t'
 
 # Rastrear erros léxicos
 def t_error(t):
-    print(f"Caractere inválido: {t.value[0]}")
+    print(f'Caractere inválido: {t.value[0]}')
     t.lexer.skip(1)
 
 #--------------------------------------------------- Construir o lexer ---------------------------------------------------#
@@ -183,8 +183,13 @@ def p_atom_group(p):
     p[0] = p[2]
 
 def p_atom_func(p):
-    'Atom : FUNC LPAR ExpSequence RPAR'
-    # Um átomo pode ser uma função com argumentos
+    '''Atom : FUNC LPAR ExpSequence RPAR'''
+    # Um átomo pode ser uma função pré-definida
+    p[0] = ('func', p[1], p[3])
+
+def p_atom_custom_func(p):
+    'Atom : ID LPAR ExpSequence RPAR'
+    # Um átomo pode ser uma função personalizada
     p[0] = ('func', p[1], p[3])
 
 def p_atom_list(p):
@@ -195,7 +200,7 @@ def p_atom_list(p):
 def p_atom_tuple(p):
     'Atom : LPAR ExpSequence RPAR'
     # Um átomo pode ser uma tupla de expressões
-    p[0] = ('tuple', p[2])  # Tupla
+    p[0] = ('tuple', p[2])
 
 def p_rel_exp(p):
     '''RelExp : Exp LT Exp
@@ -223,7 +228,7 @@ def p_stmt_end(p):
 
 def p_error(p):
     # Tratamento de erro de sintaxe
-    print("Erro de sintaxe!")
+    print('Erro de sintaxe!')
 
 #--------------------------------------------------- Construir o parse ---------------------------------------------------#
 
@@ -234,58 +239,66 @@ parser = yacc.yacc()
 def main():
     
     test_cases_valid = [
-        "a = 10;",  # Atribuição simples
-        "b = a + 5;",  # Soma
-        "c = b * 2;",  # Multiplicação
-        "d = a / 2;",  # Divisão
-        "x = (3 + 2) * (4 - 1);",  # Uso de parênteses
-        "if (x == 15) { y = x + 5; } else { y = x - 5; };",  # Estrutura if-else
-        "5 + 5;",  # Soma simples
-        "a = 5 ^ 2;",  # Exponenciação
-        "if (x < 10) { x = x + 1; } else { x = x - 1; };",  # Condição com menor que
-        "y = sqrt(25);",  # Função sqrt
-        "z = log(100);",  # Função log
-        "a = [1, 2, 3];",  # Uso de lista
-        "f = sin(x);",  # Função trigonométrica
-        "g = (a, b, c);"  # Uso de tupla
+        'a = 10;',  # Atribuição simples
+        'x = 5 + 3 * 2;', # Soma
+        'if (x > 10) {y = 1;} else {y = 0;};', # Estrutura if-else
+        'z = sin(x) + log(y);', # Atribuindo soma de funções a uma variável
+        'w = [3 + 4, 5 * 2];', # Uso de lista
+        'z = (sin(x), cos(y));', # Uso de tupla de funções
+        'if (x <= 10) {a = 1 + 2 * 3;b = a * 2;} else {a = 5 + 7;b = a / 2;};', # Estrutura if-else
+        'if (x > 0) {a = sin(x) + 5 * 3;b = sqrt(a) * cos(x);} else {a = log(10) * 2;b = a + 10;};', # Estrutura if-else
+        'y = myFunc(x, 5);',
+        'b = a + 5;',  # Soma
+        'c = b * 2;',  # Multiplicação
+        'd = a / 2;',  # Divisão
+        'x = (3 + 2) * (4 - 1);',  # Uso de parênteses
+        'if (x == 15) { y = x + 5; } else { y = x - 5; };',  # Estrutura if-else
+        '5 + 5;',  # Soma simples
+        'a = 5 ^ 2;',  # Exponenciação
+        'if (x < 10) { x = x + 1; } else { x = x - 1; };',  # Condição com menor que
+        'y = sqrt(25);',  # Função sqrt
+        'z = log(100);',  # Função log
+        'a = [1, 2, 3];',  # Uso de lista
+        'f = sin(x);',  # Função trigonométrica
+        'g = (a, b, c);'  # Uso de tupla
     ]
             
     test_cases_invalid = [
-        "10 = a;",  # Atribuição inválida
-        "1var = 5;",  # Identificador inválido
-        "a + * b;",  # Erro de operação inválida
-        "a = (5 + 3;",  # Parênteses não fechados
-        "a & b;",  # Operador inválido
-        "sin(10 + 5;",  # Parênteses de função não fechados
-        "if (x > 10) { x = 5; else { x = 10; };",  # Sintaxe inválida em if-else
-        "a = 5 @ 3;",  # Operador inválido
-        "int a = 5;",  # Tipo inválido
-        "[1, 2, 3,;",  # Lista mal formada
-        "else { x = 5; };"  # else sem if correspondente
+        '10 = a;',  # Atribuição inválida
+        '1var = 5;',  # Identificador inválido
+        'a + * b;',  # Erro de operação inválida
+        'a = (5 + 3;',  # Parênteses não fechados
+        'a & b;',  # Operador inválido
+        'sin(10 + 5;',  # Parênteses de função não fechados
+        'if (x > 10) { x = 5; else { x = 10; };',  # Sintaxe inválida em if-else
+        'a = 5 @ 3;',  # Operador inválido
+        'int a = 5;',  # Tipo inválido
+        '[1, 2, 3,;',  # Lista mal formada
+        'else { x = 5; };'  # else sem if correspondente
     ]
     
-    print('+' + 52 * '-' + " TESTES VÁLIDOS "  + 52 * '-' + '+')
+    print('+' + 52 * '-' + ' TESTES VÁLIDOS '  + 52 * '-' + '+')
     for idx, case in enumerate(test_cases_valid, start=1):
-        print(f"Teste {idx}: {case}")
+        print(f'Teste {idx}: {case}')
         try:
             result = parser.parse(case)
-            print(f"Resultado: {result}\n")
+            print(f'Resultado: {result}\n')
         except Exception as e:
-            print(f"Erro ao processar: {e}\n")
+            print(f'Erro ao processar: {e}\n')
 
-    print('+' + 51 * '-' + " TESTES INVÁLIDOS "  + 51 * '-' + '+')
+    print('+' + 51 * '-' + ' TESTES INVÁLIDOS '  + 51 * '-' + '+')
     for idx, case in enumerate(test_cases_invalid, start=1):
-        print(f"Teste {idx}: {case}")
+        print(f'Teste {idx}: {case}')
         try:
             result = parser.parse(case)
-            print(f"Resultado: {result}\n")
+            print(f'Resultado: {result}\n')
         except Exception as e:
-            print(f"Erro: {e}\n")
+            print(f'Erro: {e}\n')
 
-    print('+' + 51 * '-' + " MODO INTERATIVO "  + 52 * '-' + '+')
+    print('+' + 51 * '-' + ' MODO INTERATIVO '  + 52 * '-' + '+')
     while True:
         try:
-            s = input("Digite a expressão (ou 'sair' para encerrar): ")
+            s = input('Digite a expressão (ou "sair" para encerrar): ')
             if s.lower() == 'sair':
                 break
         except EOFError:
@@ -294,9 +307,9 @@ def main():
             continue
         try:
             result = parser.parse(s)
-            print(f"Resultado: {result}")
+            print(f'Resultado: {result}')
         except Exception as e:
-            print(f"Erro: {e}")
+            print(f'Erro: {e}')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
