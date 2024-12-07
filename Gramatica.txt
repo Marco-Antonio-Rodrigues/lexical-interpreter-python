@@ -10,8 +10,7 @@ OBS: Tipagem dinâmica e estática, programação estruturada.
 <Stmt> ::= <ID> ASSIGN <Exp> SEMICOLON?
 <Stmt> ::= IF LPAR <RelExp> RPAR LBRACE <StmtList> RBRACE (ELSE LBRACE <StmtList> RBRACE)? SEMICOLON?
 <StmtList> ::= <Stmt>+
-<FUNC> ::= sin | cos | tan | sqrt | log | exp | <CustomFunc>
-<CustomFunc> ::= <ID>
+<FUNC> ::= <ID>
 <ID> ::= [a-zA-Z_][a-zA-Z0-9_]*
 
 # TERMINAIS
