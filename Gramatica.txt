@@ -5,13 +5,14 @@ OBS: Tipagem dinâmica e estática, programação estruturada.
 <RelExp> ::= <Term> ((LT | GT | LEQ | GEQ | EQ | NEQ) <Term>)*
 <Term> ::= <Factor> ((MUL | DIV) <Factor>)*
 <Factor> ::= (PLUS | MINUS)* <Atom> | <Atom>
-<Atom> ::= INT | FLOAT | LPAR <Exp> RPAR | <ID> | <FUNC> LPAR <ExpSequence> RPAR | LBRACK <ExpSequence> RBRACK | LPAR <ExpSequence> RPAR
+<FUNC> ::= <ID> LPAR <ExpSequence> RPAR (LBRACE <StmtList> RBRACE)*
+<Atom> ::= INT | FLOAT | LPAR <Exp> RPAR | <ID> | <FUNC> | LSQUARE <ExpSequence> RSQUARE | LPAR <ExpSequence> RPAR
 <ExpSequence> ::= <Exp> (COMMA <Exp>)*
 <Stmt> ::= <ID> ASSIGN <Exp> SEMICOLON?
 <Stmt> ::= IF LPAR <RelExp> RPAR LBRACE <StmtList> RBRACE (ELSE LBRACE <StmtList> RBRACE)? SEMICOLON?
 <StmtList> ::= <Stmt>+
-<FUNC> ::= <ID>
 <ID> ::= [a-zA-Z_][a-zA-Z0-9_]*
+
 
 # TERMINAIS
 PLUS é o +
@@ -43,4 +44,4 @@ FLOAT é um float qualquer
 ID é qualquer identificador
 STRING algo entre aspas
 NULL é algo vazio
-FUNC é func
+FUNC é função
