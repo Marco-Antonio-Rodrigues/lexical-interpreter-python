@@ -1,37 +1,41 @@
 import string
 
 class Consts:
-    DIGITOS = '0123456789'
-    LETRAS = string.ascii_letters
+    DIGITOS = '0123456789' #ok
+    LETRAS = string.ascii_letters 
     LETRAS_DIGITOS = DIGITOS + LETRAS
     UNDER = '_'
+    PLUS      = '+' #ok
+    MINUS     = '-' #ok
     INT       = 'INT'
     FLOAT     = 'FLOAT'
-    PLUS      = '+'
-    MINUS     = '-'
-    MUL       = '*'
-    DIV       = '/'
-    LPAR      = '('
-    RPAR      = ')'
+    MUL       = '*' # ok
+    DIV       = '/' # ok
+    LPAR      = '(' # ok
+    RPAR      = ')' # ok
+    LT        = '<'
+    GT        = '>' 
+    LEQ       = '>='
+    GEQ       = '<=' 
+    EQ        = '=='
+    NEQ       = '!='
     EOF       = '$EOF'
     EQ        = '='
     POW       = '^'
     ID	      = 'ID'
-    KEY		  = 'KEY'
-    NULL      = 'null'
+    NULL      = 'NULL'
     STRING    = "STRING"
-    GRAPH     = '@'
     LSQUARE   = "[" # Left  Box brackets [
     RSQUARE   = "]" # Right Box brackets ]
-    COMMA      = ","
+    COMMA     = ","
+    SEMICOLON = ";"
+    KEY       = "KEY"
 
     # Exemplos de Palavras reservadas
-    LET         = 'let'
     IF          = 'if'
     WHILE       = 'while'
     FOR         = 'for'
     KEYS = [
-        LET,
         IF,
         WHILE,
         FOR

@@ -29,6 +29,8 @@ class Lexer:
                 self.__advance()
             elif self.current in Consts.DIGITOS:
                 tokens.append(self.__makeNumber())
+            elif self.current == Consts.LETRAS:
+                tokens.append(self.__makestring())
             elif self.current == Consts.PLUS:
                 tokens.append(Token(Consts.PLUS))
                 self.__advance()
@@ -70,4 +72,24 @@ class Lexer:
             return Token(Consts.INT, int(strNumber))
         else:
             return Token(Consts.FLOAT, float(strNumber))
+    
+    def __makestring(self):
+        stri = ""
+        bypass = False
+        self.__advance()
+        specialChars = {'n':'\n', 't': '\t'}
+        while (self.current != None and (self.current != '"' or bypass)):
+            if (bypass):
+                c = specialChars.get(self.current, self.current)
+                stri += c
+                bypass = False
+            else:
+                if (self.current == '\\'):
+                    bypass = True
+                else:
+                    stri += self.current
+            self.__advance()
+
+        self.__advance()
+        return Token(Consts.STRING, stri)
     

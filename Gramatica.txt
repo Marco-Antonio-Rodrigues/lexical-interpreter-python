@@ -1,3 +1,6 @@
+OBS: Tipagem dinâmica e estática, programação estruturada.
+
+# REGRAS DE TRANSIÇÕES
 <Exp> ::= <Term> ((PLUS | MINUS) <Term>)*
 <RelExp> ::= <Term> ((LT | GT | LEQ | GEQ | EQ | NEQ) <Term>)*
 <Term> ::= <Factor> ((MUL | DIV) <Factor>)*
@@ -11,16 +14,17 @@
 <CustomFunc> ::= <ID>
 <ID> ::= [a-zA-Z_][a-zA-Z0-9_]*
 
+# TERMINAIS
 PLUS é o +
 MUL é o *
-DIV é o /
+DIV é o /   
 MINUS é o -
-EXP é o ^
+POW é o ^
 LPAR é o (
 RPAR é o )
 ASSIGN é o =
-LBRACK é o [
-RBRACK é o ]
+LSQUARE é o [
+RSQUARE é o ]
 COMMA é o ,
 SEMICOLON é o ;
 LT é o <
@@ -33,7 +37,10 @@ LBRACE é o {
 RBRACE é o }
 IF é o if
 ELSE é o else
+
+# TIPO
 INT é um inteiro qualquer
 FLOAT é um float qualquer
 ID é qualquer identificador
-STRING algo entre aspas 
+STRING algo entre aspas
+NULL é algo vazio
