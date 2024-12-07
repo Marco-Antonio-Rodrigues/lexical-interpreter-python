@@ -29,8 +29,10 @@ class Lexer:
                 self.__advance()
             elif self.current in Consts.DIGITOS:
                 tokens.append(self.__makeNumber())
-            elif self.current == Consts.LETRAS:
+            elif self.current == '"':
                 tokens.append(self.__makestring())
+            elif self.current in Consts.LETRAS:
+                tokens.append(self.__make_id())
             elif self.current == Consts.PLUS:
                 tokens.append(Token(Consts.PLUS))
                 self.__advance()
@@ -48,6 +50,48 @@ class Lexer:
                 self.__advance()
             elif self.current == Consts.RPAR:
                 tokens.append(Token(Consts.RPAR))
+                self.__advance()
+            elif self.current == Consts.ASSIGN:
+                tokens.append(Token(Consts.ASSIGN))
+                self.__advance()
+            elif self.current == Consts.SEMICOLON:
+                tokens.append(Token(Consts.SEMICOLON))
+                self.__advance()
+            elif self.current == Consts.COMMA:
+                tokens.append(Token(Consts.COMMA))
+                self.__advance()
+            elif self.current == Consts.LSQUARE:
+                tokens.append(Token(Consts.LSQUARE))
+                self.__advance()
+            elif self.current == Consts.RSQUARE:
+                tokens.append(Token(Consts.RSQUARE))
+                self.__advance()
+            elif self.current == Consts.LBRACE:
+                tokens.append(Token(Consts.LBRACE))
+                self.__advance()
+            elif self.current == Consts.RBRACE:
+                tokens.append(Token(Consts.RBRACE))
+                self.__advance()
+            elif self.current == Consts.POW:
+                tokens.append(Token(Consts.POW))
+                self.__advance()
+            elif self.current == Consts.NEQ:
+                tokens.append(Token(Consts.NEQ))
+                self.__advance()
+            elif self.current == Consts.EQ:
+                tokens.append(Token(Consts.EQ))
+                self.__advance()
+            elif self.current == Consts.GEQ:
+                tokens.append(Token(Consts.GEQ))
+                self.__advance()
+            elif self.current == Consts.LEQ:
+                tokens.append(Token(Consts.LEQ))
+                self.__advance()
+            elif self.current == Consts.GT:
+                tokens.append(Token(Consts.GT))
+                self.__advance()
+            elif self.current == Consts.LT:
+                tokens.append(Token(Consts.LT))
                 self.__advance()
             else:
                 self.__advance()
@@ -92,4 +136,14 @@ class Lexer:
 
         self.__advance()
         return Token(Consts.STRING, stri)
+    
+    def __make_id(self):
+        """ variaveis, funções e palavras reservadas"""
+        id = ""
+        while self.current!= None and self.current in Consts.LETRAS_DIGITOS + Consts.UNDER:
+            id += self.current
+            self.__advance()
+        if id in Consts.KEYS:
+            return Token(Consts.KEY, id)
+        return Token(Consts.ID, id)
     

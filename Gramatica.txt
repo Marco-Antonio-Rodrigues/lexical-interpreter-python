@@ -44,3 +44,4 @@ FLOAT é um float qualquer
 ID é qualquer identificador
 STRING algo entre aspas
 NULL é algo vazio
+FUNC é func

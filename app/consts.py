@@ -7,36 +7,45 @@ class Consts:
     UNDER = '_'
     PLUS      = '+' #ok
     MINUS     = '-' #ok
-    INT       = 'INT'
-    FLOAT     = 'FLOAT'
     MUL       = '*' # ok
     DIV       = '/' # ok
     LPAR      = '(' # ok
     RPAR      = ')' # ok
-    LT        = '<'
-    GT        = '>' 
-    LEQ       = '>='
-    GEQ       = '<=' 
-    EQ        = '=='
-    NEQ       = '!='
+    LT        = '<' # ok
+    GT        = '>' # ok
+    LEQ       = '>=' # ok
+    GEQ       = '<=' # ok
+    EQ        = '==' # ok
+    NEQ       = '!=' # ok
     EOF       = '$EOF'
-    EQ        = '='
-    POW       = '^'
-    ID	      = 'ID'
+    ASSIGN    = '=' # ok
+    POW       = '^' # ok
+    ID	      = 'ID' # ok
+    LBRACE    = "{" # ok
+    RBRACE    = "}" # ok
+    LSQUARE   = "[" # ok
+    RSQUARE   = "]" # ok
+    COMMA     = "," #ok
+    SEMICOLON = ";" #ok
+    KEY       = "KEY" # ok
+    
+    # TIPOS
     NULL      = 'NULL'
     STRING    = "STRING"
-    LSQUARE   = "[" # Left  Box brackets [
-    RSQUARE   = "]" # Right Box brackets ]
-    COMMA     = ","
-    SEMICOLON = ";"
-    KEY       = "KEY"
+    INT       = 'INT'
+    FLOAT     = 'FLOAT'
 
-    # Exemplos de Palavras reservadas
-    IF          = 'if'
-    WHILE       = 'while'
-    FOR         = 'for'
+    # Palavras reservadas
+    IF          = 'if' # ok
+    ELIF        = 'elif' # ok
+    ELSE        = 'else' # ok
+    WHILE       = 'while' # ok
+    FOR         = 'for' # ok
+    FUNC        = 'func' # ok
     KEYS = [
         IF,
+        ELSE,
         WHILE,
-        FOR
+        FOR,
+        FUNC
     ]
