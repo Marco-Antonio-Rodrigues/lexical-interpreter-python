@@ -1,47 +1,141 @@
-OBS: Tipagem dinâmica e estática, programação estruturada.
++----------------------------------------------------- GRAMÁTICA -----------------------------------------------------+
 
-# REGRAS DE TRANSIÇÕES
-<Exp> ::= <Term> ((PLUS | MINUS) <Term>)*
-<RelExp> ::= <Term> ((LT | GT | LEQ | GEQ | EQ | NEQ) <Term>)*
-<Term> ::= <Factor> ((MUL | DIV) <Factor>)*
-<Factor> ::= (PLUS | MINUS)* <Atom> | <Atom>
-<FUNC> ::= <ID> LPAR <ExpSequence> RPAR (LBRACE <StmtList> RBRACE)*
-<Atom> ::= INT | FLOAT | LPAR <Exp> RPAR | <ID> | <FUNC> | LSQUARE <ExpSequence> RSQUARE | LPAR <ExpSequence> RPAR
-<ExpSequence> ::= <Exp> (COMMA <Exp>)*
-<Stmt> ::= <ID> ASSIGN <Exp> SEMICOLON?
-<Stmt> ::= IF LPAR <RelExp> RPAR LBRACE <StmtList> RBRACE (ELSE LBRACE <StmtList> RBRACE)? SEMICOLON?
-<StmtList> ::= <Stmt>+
-<ID> ::= [a-zA-Z_][a-zA-Z0-9_]*
+G = (V, T, P, S)
+V: conjunto finito de símbolos variáveis ou não-terminais
+T: conjunto finito de símbolos terminais disjuntos de V
+P: (VUT)^+ -> (VUT)^*: Relação finita, regras de produções
+S: elemento distinguido de V, símbolo inicial
+
++-------------------------------------------- SÍMBOLOS NÃO-TERMINAIS (V) ---------------------------------------------+
+
+<Program>: representa um programa, que pode ser uma sequência de instruções (declarações e expressões).
+<StmtList>: representa uma lista de instruções.
+<Stmt>: representa uma instrução, que pode ser uma declaração de variável, uma instrução if, uma declaração de função, 
+        uma expressão com ponto e vírgula, entre outros.
+<IfStmt>: representa uma instrução condicional if, podendo incluir também elif e else.
+<VarStmt>: representa uma declaração de variável ou uma atribuição, com ou sem inicialização.
+<FuncDeclaration>: representa a declaração de uma função, incluindo seu tipo, parâmetros e corpo.
+<ExpStmt>: representa uma expressão que é executada, seguida por um ponto e vírgula (por exemplo, a = b + 1;).
+<Exp>: representa uma expressão, que pode envolver operadores aritméticos, relacionais ou chamadas de função.
+<RelExp>: representa uma expressão relacional, onde se comparam duas expressões (por exemplo, a < b, a == b).
+<Term>: representa um termo em uma expressão aritmética, sendo um fator multiplicado ou dividido por outro fator.
+<Factor>: representa um fator, que pode ser um número, uma variável ou uma expressão entre parênteses.
+<Atom>: representa o valor básico de uma expressão, que pode ser um número (inteiro ou ponto flutuante), variável, 
+        chamada de função ou um vetor.
+<FuncCall>: representa uma chamada de função, podendo ter parâmetros passados como uma sequência de expressões.
+<ExpSequence>: representa uma sequência de expressões separadas por vírgulas, como em chamadas de função com múltiplos 
+               parâmetros ou listas de argumentos.
+<Type>: representa um tipo de dado, que pode ser INT, FLOAT e VOID.
+<ID>: representa um identificador, que pode ser o nome de uma variável ou uma função.
+<ElifBlock>: representa um bloco elif dentro de uma estrutura condicional if. Ele contém uma condição e um bloco de 
+             instruções que são executadas se a condição do elif for verdadeira.
+<ElseBlock>: representa um bloco else dentro de uma estrutura condicional if. Ele contém um conjunto de instruções 
+             que são executadas quando nenhuma das condições anteriores são verdadeiras.
+<ForStmt>: representa um laço for, com uma inicialização, condição e incremento/decremento.
+<WhileStmt>: representa um laço while, que executa um bloco de instruções enquanto a condição for verdadeira.
+<ReturnStmt>: representa uma instrução de retorno, com ou sem uma expressão retornada.
+
++----------------------------------------------- SÍMBOLOS TERMINAIS (T) ----------------------------------------------+
+
+PLUS: o símbolo '+' (adição).
+MINUS: o símbolo '-' (subtração).
+MUL: o símbolo '*' (multiplicação).
+DIV: o símbolo '/' (divisão).
+POW: o símbolo '^' potenciação.
+ASSIGN: o símbolo '=' (atribuição).
+LT: o símbolo '<' (menor que).
+GT: o símbolo '>' (maior que).
+LEQ: o símbolo '<=' (menor ou igual).
+GEQ: o símbolo '>=' (maior ou igual).
+EQ: o símbolo '==' (igual a).
+NEQ: o símbolo '!=' (diferente de).
+AND: o símbolo '&&' (e lógico).
+OR: o símbolo '||' (ou lógico).
+NOT: o símbolo '!' (não lógico).
+
+COMMA: o símbolo ',' (vírgula).
+SEMICOLON: o símbolo ';' (ponto e vírgula).
+LPAR: o símbolo '(' (parêntese esquerdo).
+RPAR: o símbolo ')' (parêntese direito).
+LBRACE: o símbolo '{' (chave esquerda).
+RBRACE: o símbolo '}' (chave direita).
+LSQUARE: o símbolo '[' (colchete esquerda).
+RSQUARE: o símbolo ']' (colchete direita).
+
+EOF: o símb '$EOF' (representa o fim do programa)
+KEY: o símbolo 'KEY' (representa uma palavra reservada)
+ID: o símbolo 'ID' (representa um identificador único para variável ou função)
+
+VOID: o tipo de dado vazio.
+INT: o tipo de dado inteiro.
+FLOAT: o tipo de dado de ponto flutuante.
+BOOL: o tipo de dado boolean
+STRING: o tipo de dado string
+
+IF: a palavra-chave para a instrução condicional if.
+ELIF: a palavra-chave para a instrução condicional elif.
+ELSE: a palavra-chave para a instrução condicional else.
+WHILE: a palavra-chave para o laço while.
+FOR: a palavra-chave para o laço for.
+FUNC: a palavra-chave para definir uma função 'func'
+RETURN: a palavra-chave para a instrução de retorno.
+TRUE: é a palavra-chave true
+FALSE: a palavra-chave false
+
++---------------------------------------------- REGRAS DE DERIVAÇÃO (P) -----------------------------------------------+
+
+1 - Estrutura principal:
+
+    <Program> ::= <StmtList>+
+    <StmtList> ::= (<Stmt>+)?
+
+2 - Declarações e instruções:
+
+    <Stmt> ::= <IfStmt> | <VarStmt>* | <FuncDeclaration> | <ExpStmt> | <ForStmt> | <WhileStmt>
+    <ForStmt> ::= FOR LPAR (<VarStmt>? | <Exp>? SEMICOLON) <RelExp>? SEMICOLON <Exp>? RPAR LBRACE <StmtList> RBRACE
+    <WhileStmt> ::= WHILE LPAR <RelExp> RPAR LBRACE <StmtList> RBRACE
+    <IfStmt> ::= IF LPAR <RelExp> RPAR LBRACE <StmtList> RBRACE (<ElifBlock>)* (<ElseBlock>)? SEMICOLON?
+    <ElifBlock> ::= ELIF LPAR <RelExp> RPAR LBRACE <StmtList> RBRACE
+    <ElseBlock> ::= ELSE LBRACE <StmtList> RBRACE
+    <VarStmt> ::= <Type>? <ID> (ASSIGN <Exp>)?  SEMICOLON?
+    <FuncDeclaration> ::= <Type> <ID> LPAR <ExpSequence>? RPAR LBRACE <StmtList>? <ReturnStmt>? RBRACE
+    <ReturnStmt> ::= RETURN <Exp>? SEMICOLON
+    <ExpStmt> ::= <Exp> SEMICOLON
 
 
-# TERMINAIS
-PLUS é o +
-MUL é o *
-DIV é o /   
-MINUS é o -
-POW é o ^
-LPAR é o (
-RPAR é o )
-ASSIGN é o =
-LSQUARE é o [
-RSQUARE é o ]
-COMMA é o ,
-SEMICOLON é o ;
-LT é o <
-GT é o > 
-LEQ é o >=
-GEQ é o <= 
-EQ é o == 
-NEQ é o != 
-LBRACE é o {
-RBRACE é o }
-IF é o if
-ELSE é o else
+3 - Expressões e seus componentes:
 
-# TIPO
-INT é um inteiro qualquer
-FLOAT é um float qualquer
-ID é qualquer identificador
-STRING algo entre aspas
-NULL é algo vazio
-FUNC é função
+    <Exp> ::= <Term> ((PLUS | MINUS) <Term>)* | <RelExp>
+    <Term> ::= <Factor> ((MUL | DIV) <Factor>)*
+    <Factor> ::= ((PLUS | MINUS)*)? <Atom>
+    <Atom> ::= INT | FLOAT | BOOL |LPAR <Exp> RPAR | <ID> | <FuncCall> | LBRACK <ExpSequence> RBRACK
+    <FuncCall> ::= <ID> LPAR <ExpSequence>? RPAR
+    <ExpSequence> ::= (<Exp> (COMMA <Exp>)*)?
+
+4 - Tipos e expressões relacionais:
+
+    <Type> ::= INT | FLOAT | VOID | BOOL
+    <RelExp> ::= <Exp> ((LT | GT | LEQ | GEQ | EQ | NEQ) <Exp>)* | <Exp> ((AND | OR) <Exp>)* | NOT <Exp>
+
+5 - Identificadores:
+
+    <ID> ::= [a-zA-Z_][a-zA-Z0-9_]*
+
++------------------------------------------------ SÍMBOLO INICIAL (S) ------------------------------------------------+
+
+<Program>: representa um programa, que pode ser uma sequência de instruções (declarações e expressões).
+
++----------------------------------------------- LINGUAGEM GERADA L(G) --- -------------------------------------------+
+
+Essa gramática gera uma linguagem de programação procedural e estruturada, similar à linguagem C, com a possibilidade 
+de expandir e adicionar recursos conforme necessário.
+
+Essa gramática descreve uma linguagem de programação com:
+
+Controle de fluxo (condições if, elif, else e laços for, while).
+Declarações de variáveis e funções, com suporte a múltiplas variáveis em uma linha e chamadas de funções com parâmetros.
+Expressões aritméticas e relacionais, incluindo operações de soma, subtração, multiplicação, divisão e comparações.
+Suporte a tipos primitivos como int, float, double, char, e void.
+Identificadores e funções com chamada de parâmetros.
+
++---------------------------------------------------------------------------------------------------------------------+
