@@ -97,17 +97,17 @@ precedence = (
     ('right', 'NOT'),
 )
 
-def p_program(p):
-    '''program : stmt_list'''
-    p[0] = ('Program', p[1])
+#def p_program(p):
+#    '''program : stmt_list'''
+#    p[0] = ('Program', p[1])
 
 def p_stmt_list(p):
     '''stmt_list : stmt stmt_list
                  | stmt'''
     if len(p) == 3: 
-        p[0] = ['StmtList'] + [p[1]] + p[2]
+        p[0] = ('StmtList', p[1], p[2])  
     else:  
-        p[0] = ['StmtList', p[1]]
+        p[0] = ('StmtList', p[1]) 
 
 def p_stmt(p):
     '''stmt : if_stmt
@@ -127,9 +127,9 @@ def p_elif_blocks(p):
     '''elif_blocks : elif_block elif_blocks
                    | '''  # Vazio
     if len(p) == 3:
-        p[0] = [p[1]] + p[2]
+        p[0] = (p[1],) + p[2]  
     else:
-        p[0] = []
+        p[0] = ()  
 
 def p_elif_block(p):
     '''elif_block : ELIF LPAR rel_exp RPAR LBRACE stmt_list RBRACE'''
@@ -141,7 +141,7 @@ def p_else_block(p):
     if len(p) == 5:
         p[0] = ('ElseBlock', p[3])
     else:
-        p[0] = []
+        p[0] = ()
 
 def p_var_stmt(p):
     '''var_stmt : type ID var_assign_list SEMICOLON
@@ -150,17 +150,17 @@ def p_var_stmt(p):
         p[0] = ('VarStmt', None, p[1], p[2], p[3])  
     else:
         p[0] = ('VarStmt', p[1], p[2], p[3])
-
+        
 def p_var_assign_list(p):
     '''var_assign_list : ASSIGN exp
                        | COMMA ID var_assign_list
                        | '''  # Vazio
     if len(p) == 4:
-        p[0] = [('ID', p[2])] + p[3]
+        p[0] = (('ID', p[2]),) + p[3]
     elif len(p) == 3:
-        p[0] = [('Assign', p[1], p[2])]
+        p[0] = (('Assign', p[1], p[2]))
     else:
-        p[0] = []
+        p[0] = ()
 
 def p_func_declaration(p):
     '''func_declaration : type ID LPAR arg_sequence_opt RPAR LBRACE stmt_list_opt return_stmt_opt RBRACE'''
@@ -169,20 +169,20 @@ def p_func_declaration(p):
 def p_arg_sequence_opt(p):
     '''arg_sequence_opt : arg_sequence
                         | '''  # Vazio
-    p[0] = p[1] if len(p) == 2 else []
+    p[0] = p[1] if len(p) == 2 else ()
     
 def p_arg_sequence(p):
     '''arg_sequence : type ID
                     | type ID COMMA arg_sequence'''
     if len(p) == 3:
-        p[0] = [(p[1], p[2])]
+        p[0] = ((p[1], p[2]))
     else:
-        p[0] = [(p[1], p[2])] + p[4]
+        p[0] = ((p[1], p[2]),) + p[4]
 
 def p_param_list_opt(p):
     '''param_list_opt : arg_sequence_opt
                       | '''  # Vazio
-    p[0] = p[1] if len(p) == 2 else []
+    p[0] = p[1] if len(p) == 2 else ()
 
 def p_stmt_list_opt(p):
     '''stmt_list_opt : stmt_list
@@ -335,7 +335,7 @@ def p_error(p):
 
 #--------------------------------------------------------- PARSER --------------------------------------------------------#
 
-parser = yacc.yacc()
+parser = yacc.yacc(start='stmt_list')
 
 #--------------------------------------------------------- TESTE ---------------------------------------------------------#
 
