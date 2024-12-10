@@ -45,41 +45,17 @@ class Lexer:
             elif self.current == Consts.DIV:
                 tokens.append(Token(Consts.DIV))
                 self.__advance()
-            elif self.current == Consts.LPAR:
-                tokens.append(Token(Consts.LPAR))
-                self.__advance()
-            elif self.current == Consts.RPAR:
-                tokens.append(Token(Consts.RPAR))
+            elif self.current == Consts.POW:
+                tokens.append(Token(Consts.POW))
                 self.__advance()
             elif self.current == Consts.ASSIGN:
                 tokens.append(Token(Consts.ASSIGN))
                 self.__advance()
-            elif self.current == Consts.SEMICOLON:
-                tokens.append(Token(Consts.SEMICOLON))
+            elif self.current == Consts.LT:
+                tokens.append(Token(Consts.LT))
                 self.__advance()
-            elif self.current == Consts.COMMA:
-                tokens.append(Token(Consts.COMMA))
-                self.__advance()
-            elif self.current == Consts.LSQUARE:
-                tokens.append(Token(Consts.LSQUARE))
-                self.__advance()
-            elif self.current == Consts.RSQUARE:
-                tokens.append(Token(Consts.RSQUARE))
-                self.__advance()
-            elif self.current == Consts.LBRACE:
-                tokens.append(Token(Consts.LBRACE))
-                self.__advance()
-            elif self.current == Consts.RBRACE:
-                tokens.append(Token(Consts.RBRACE))
-                self.__advance()
-            elif self.current == Consts.POW:
-                tokens.append(Token(Consts.POW))
-                self.__advance()
-            elif self.current == Consts.NEQ:
-                tokens.append(Token(Consts.NEQ))
-                self.__advance()
-            elif self.current == Consts.EQ:
-                tokens.append(Token(Consts.EQ))
+            elif self.current == Consts.GT:
+                tokens.append(Token(Consts.GT))
                 self.__advance()
             elif self.current == Consts.GEQ:
                 tokens.append(Token(Consts.GEQ))
@@ -87,11 +63,44 @@ class Lexer:
             elif self.current == Consts.LEQ:
                 tokens.append(Token(Consts.LEQ))
                 self.__advance()
-            elif self.current == Consts.GT:
-                tokens.append(Token(Consts.GT))
+            elif self.current == Consts.EQ:
+                tokens.append(Token(Consts.EQ))
                 self.__advance()
-            elif self.current == Consts.LT:
-                tokens.append(Token(Consts.LT))
+            elif self.current == Consts.NEQ:
+                tokens.append(Token(Consts.NEQ))
+                self.__advance()
+            elif self.current == Consts.AND:
+                tokens.append(Token(Consts.AND))
+                self.__advance()
+            elif self.current == Consts.OR:
+                tokens.append(Token(Consts.OR))
+                self.__advance()
+            elif self.current == Consts.NOT:
+                tokens.append(Token(Consts.NOT))
+                self.__advance()
+            elif self.current == Consts.COMMA:
+                tokens.append(Token(Consts.COMMA))
+                self.__advance()
+            elif self.current == Consts.SEMICOLON:
+                tokens.append(Token(Consts.SEMICOLON))
+                self.__advance()
+            elif self.current == Consts.LPAR:
+                tokens.append(Token(Consts.LPAR))
+                self.__advance()
+            elif self.current == Consts.RPAR:
+                tokens.append(Token(Consts.RPAR))
+                self.__advance()
+            elif self.current == Consts.LBRACE:
+                tokens.append(Token(Consts.LBRACE))
+                self.__advance()
+            elif self.current == Consts.RBRACE:
+                tokens.append(Token(Consts.RBRACE))
+                self.__advance()
+            elif self.current == Consts.LSQUARE:
+                tokens.append(Token(Consts.LSQUARE))
+                self.__advance()
+            elif self.current == Consts.RSQUARE:
+                tokens.append(Token(Consts.RSQUARE))
                 self.__advance()
             else:
                 self.__advance()
