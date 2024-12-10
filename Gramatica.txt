@@ -42,13 +42,8 @@ PLUS: o símbolo ´+´ (adição).
 MINUS: o símbolo ´-´ (subtração).
 MUL: o símbolo ´*´ (multiplicação).
 DIV: o símbolo ´/´ (divisão).
+POW: o símbolo ´/´ (exponenciação).
 ASSIGN: o símbolo ´=´ (atribuição).
-COMMA: o símbolo ´,´ (vírgula).
-SEMICOLON: o símbolo ´;´ (ponto e vírgula).
-LPAR: o símbolo ´(´ (parêntese esquerdo).
-RPAR: o símbolo ´)´ (parêntese direito).
-LBRACE: o símbolo ´{´ (chave esquerda).
-RBRACE: o símbolo ´}´ (chave direita).
 LT: o símbolo ´<´ (menor que).
 GT: o símbolo ´>´ (maior que).
 LEQ: o símbolo ´<=´ (menor ou igual).
@@ -58,15 +53,35 @@ NEQ: o símbolo ´!=´ (diferente de).
 AND: o símbolo ´&&´ (e lógico).
 OR: o símbolo ´||´ (ou lógico).
 NOT: o símbolo ´!´ (não lógico).
-INT: o tipo de dado inteiro.
-FLOAT: o tipo de dado de ponto flutuante.
+
+COMMA: o símbolo ´,´ (vírgula).
+SEMICOLON: o símbolo ´;´ (ponto e vírgula).
+LPAR: o símbolo ´(´ (parêntese esquerdo).
+RPAR: o símbolo ´)´ (parêntese direito).
+LBRACE: o símbolo ´{´ (chave esquerda).
+RBRACE: o símbolo ´}´ (chave direita).
+LSQUARE: o símbolo ´[´ (colchete esqueda).
+RSQUARE: o símbolo ´]´ (colchete direita).
+
+EOF: o símbolo ´$EOF´ (Representa o fim do programa).
+KEY: o símbolo ´KEY´ (Representa palavras reservadas).
+ID: o símbolo ´ID´ (Representa nomes de variáveis e funções)
+
 VOID: o tipo de dado vazio.
+INT: o tipo de dado inteiro.
+STRING: o tipo de dado string.
+FLOAT: o tipo de dado de ponto flutuante.
+BOOL: o tipo de dado booleano.
+
 IF: a palavra-chave para a instrução condicional if.
 ELIF: a palavra-chave para a instrução condicional elif.
 ELSE: a palavra-chave para a instrução condicional else.
-FOR: a palavra-chave para o laço for.
 WHILE: a palavra-chave para o laço while.
+FOR: a palavra-chave para o laço for.
+FUNC: a palavra-chave para declarar uma função
 RETURN: a palavra-chave para a instrução de retorno.
+TRUE: a palavra-chave para declarar uma variável do tipo booleano ´true´.
+FALSE: a palavra-chave para declarar uma variável do tipo booleano ´false´.
 
 +---------------------------------------------- REGAS DE DERIVAÇÃO (P) -----------------------------------------------+
 
