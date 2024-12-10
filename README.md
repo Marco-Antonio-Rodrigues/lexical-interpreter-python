@@ -2,6 +2,9 @@
 
 Este é um projeto de interpretação lexical para uma linguagem específica, desenvolvido em Python. Ele é composto por módulos que realizam diferentes etapas de análise, como tokenização, análise de erros e execução interativa.
 
+##
+link para a doc: https://marco-antonio-rodrigues.github.io/doc-lexical-interpreter-python/
+
 ## 📁 Estrutura do Projeto
 
 ```bash

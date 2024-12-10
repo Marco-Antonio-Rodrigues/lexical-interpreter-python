@@ -1,51 +1,67 @@
 import string
 
 class Consts:
-    DIGITOS = '0123456789' #ok
+    DIGITOS = '0123456789' 
     LETRAS = string.ascii_letters 
     LETRAS_DIGITOS = DIGITOS + LETRAS
     UNDER = '_'
-    PLUS      = '+' #ok
-    MINUS     = '-' #ok
-    MUL       = '*' # ok
-    DIV       = '/' # ok
-    LPAR      = '(' # ok
-    RPAR      = ')' # ok
-    LT        = '<' # ok
-    GT        = '>' # ok
-    LEQ       = '>=' # ok
-    GEQ       = '<=' # ok
-    EQ        = '==' # ok
-    NEQ       = '!=' # ok
+    
+    # TERMINAIS
+    PLUS      = '+' 
+    MINUS     = '-' 
+    MUL       = '*' 
+    DIV       = '/' 
+    POW       = '^' 
+    ASSIGN    = '=' 
+    LT        = '<' 
+    GT        = '>' 
+    GEQ       = '<=' 
+    LEQ       = '>=' 
+    EQ        = '==' 
+    NEQ       = '!=' 
+    AND       = '&&'
+    OR        = '||'
+    NOT       = '!'
+    
+    COMMA     = "," 
+    SEMICOLON = ";" 
+    LPAR      = '(' 
+    RPAR      = ')' 
+    LBRACE    = "{" 
+    RBRACE    = "}" 
+    LSQUARE   = "[" 
+    RSQUARE   = "]" 
+    
     EOF       = '$EOF'
-    ASSIGN    = '=' # ok
-    POW       = '^' # ok
-    ID	      = 'ID' # ok
-    LBRACE    = "{" # ok
-    RBRACE    = "}" # ok
-    LSQUARE   = "[" # ok
-    RSQUARE   = "]" # ok
-    COMMA     = "," #ok
-    SEMICOLON = ";" #ok
-    KEY       = "KEY" # ok
+    KEY       = "KEY"
+    ID	      = 'ID' 
     
     # TIPOS
-    NULL      = 'NULL'
-    STRING    = "STRING"
+    VOID      = 'VOID'
     INT       = 'INT'
+    STRING    = 'STRING'
     FLOAT     = 'FLOAT'
+    BOOL      = 'BOOL'
 
     # Palavras reservadas
-    IF          = 'if' # ok
-    ELIF        = 'elif' # ok
-    ELSE        = 'else' # ok
-    WHILE       = 'while' # ok
-    FOR         = 'for' # ok
-    FUNC        = 'func' # ok
+    IF          = 'if' 
+    ELIF        = 'elif' 
+    ELSE        = 'else' 
+    WHILE       = 'while' 
+    FOR         = 'for' 
+    FUNC        = 'func' 
+    RETURN      = 'return'
+    TRUE        = 'true'
+    FALSE       = 'false'
+    
+    BOOLS = [TRUE,FALSE]
+        
     KEYS = [
         IF,
+        ELIF,
         ELSE,
         WHILE,
         FOR,
-        FUNC
+        FUNC,
+        RETURN
     ]
